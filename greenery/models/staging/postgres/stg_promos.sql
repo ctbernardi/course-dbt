@@ -5,7 +5,7 @@
 }}
 
 SELECT 
-    promo_id as promo_guid
+    promo_id as promo_name
     , discount
-    , status   
+    , status  as promo_status
 FROM {{ source('postgres', 'promos') }}

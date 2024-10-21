@@ -1,3 +1,5 @@
+{% snapshot inventory_snapshot %}
+
 {{
   config(
     target_database = target.database,

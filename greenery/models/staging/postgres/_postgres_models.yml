@@ -3,15 +3,64 @@ version: 2
 models:
   - name: stg_addresses
     description: Addresses of users 
+    columns:
+      - name: address_guid
+        tests:
+          - not_null
+          - unique
+      - name: zipcode
+        tests:
+          - not_null
+          - five_digits
+
   - name: stg_events
     description: events desc.
+    columns:
+      - name: event_guid
+        tests:
+            - not_null
+            - unique
+
+      - name: user_guid
+        tests: 
+          - relationships: 
+              to: ref('stg_users')
+              field: user_guid
+
   - name: stg_order_items
     description: order_items desc.
+    columns:
+      - name: order_guid
+        tests:
+          - not_null
+      - name: product_guid
+        tests:
+          - not_null
+    
   - name: stg_orders
     description: orders desc.
+    columns:
+      - name: order_guid
+        tests:
+          - not_null
+          - unique
+
   - name: stg_products
     description: products desc.
+    columns:
+      - name: product_guid
+        tests:
+          - not_null
+          - unique
+
   - name: stg_promos
     description: promos desc.
+
+
   - name: stg_users
     description: users desc.
+    columns:
+      - name: user_guid
+        tests:
+          - not_null
+          - unique

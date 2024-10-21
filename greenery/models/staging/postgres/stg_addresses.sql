@@ -7,7 +7,7 @@
 SELECT 
     address_id AS address_guid,
     address,
-    zipcode,
+    LPAD(CAST(zipcode AS VARCHAR), 5, '0') as zipcode,
     state,
     country,
 FROM {{ source('postgres', 'addresses') }}
