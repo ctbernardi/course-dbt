@@ -23,10 +23,7 @@ select a.session_guid
     , c.session_end_time_utc
     , d.product_name
     , d.product_type
-    , count(distinct case when a.event_type = 'page_view' then a.event_guid else null end) as page_views
-    , count(distinct case when a.event_type = 'add_to_cart' then a.event_guid else null end) as add_to_carts
-    , count(distinct case when a.event_type = 'checkout' then a.event_guid else null end) as checkouts
-    , count(distinct case when a.event_type = 'package_shipped' then a.event_guid else null end) as packages_shipped
+    , {{ aggregate_distinct_counts('stg_events', 'event_type', 'event_guid') }}
     , datediff('minute',c.session_start_time_utc,c.session_end_time_utc) as session_length_minutes
 from events a
 left join order_items b on a.order_guid = b.order_guid

@@ -1,0 +1,38 @@
+version: 2
+
+macros:
+  - name: aggregate_distinct_counts
+    description: Generates SQL for counting distinct values in a specified column based on distinct values from a filter column in a given table.
+    arguments:
+      - name: table_name
+        description: Name of the source table
+      - name: filter_column
+        description: Column to filter distinct values
+      - name: count_column
+        description: Column to count distinct values
+  - name: grant
+    description: Grants USAGE on the schema and SELECT on the current model to the specified role
+    arguments:
+      - name: role
+        description: The role to which permissions will be granted.
+  - name: lbs_to_kgs
+    description: Converts a weight in pounds to kilograms, rounding to the specified precision and returns NULL for input values of -99
+    arguments:
+      - name: column_name
+        description: The column containing weights in pounds to be converted
+      - name: precision
+        description: The number of decimal places to round the result (default is 2)  
+  - name: positive_values
+    description: Ensures that specified column values in the given model are non-negative
+    arguments:
+      - name: model
+        description: The model to be tested.
+      - name: column_name
+        description: The column to check for negative values.
+  - name: test_5_digits
+    description: Validates that values in the specified column of the given model are exactly five digits long
+    arguments:
+      - name: model
+        description: The model to be tested.
+      - name: column_name
+        description: The column to check for five-digit values.
